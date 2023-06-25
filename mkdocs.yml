@@ -88,6 +88,8 @@ extra:
     #   link: https://twitter.com/csl122
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/csl122/
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:csl122@hotmail.com
 
 markdown_extensions:
   - pymdownx.highlight:
