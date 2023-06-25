@@ -1,17 +1,26 @@
-# Welcome to MkDocs
+# Colin's Space - コリンのスペース
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This is a place for me to keep track of my learning progress and share my thoughts with others.
 
-## Commands
+## [AIGC](aigc)
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
 
-## Project layout
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+## [NLP](nlp)
+
+
+## [ML/DL](ml)
+
+
+## [Mac](mac)
+
+
+## [Linux](linux)
+
+
+## [Networking](networking)
+
+
+## [Game](game)
+
+

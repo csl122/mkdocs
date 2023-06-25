@@ -1,11 +1,20 @@
 site_name: コリンのスペース
+site_description: Colin's Space
+site_url: 'https://csl122.com/'
+site_author: Shiliang Chen
+repo_url: 'https://github.com/csl122/mkdocs'
+edit_uri: edit/main/docs/
 theme:
   name: material
   features:
     - navigation.tabs
-    - navigation.sections
-    - toc.integrate
     - navigation.top
+    - navigation.sections
+    - navigation.tracking
+    - navigation.indexes
+    - navigation.expand
+    # - toc.integrate
+    - toc.follow
     - search.suggest
     - search.highlight
     - content.tabs.link
@@ -16,16 +25,54 @@ theme:
   palette:
     - scheme: default
       toggle:
-        icon: material/toggle-switch-off-outline 
+        icon: material/brightness-7
         name: Switch to dark mode
-      primary: teal
-      accent: purple 
+      primary: white
+      accent: cyan
     - scheme: slate 
       toggle:
-        icon: material/toggle-switch
+        icon: material/brightness-4
         name: Switch to light mode    
-      primary: teal
-      accent: lime
+      primary: black
+      accent: cyan
+  icon:
+    logo: material/apple-keyboard-command
+    repo: fontawesome/brands/github
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+
+nav:
+  - Home:
+      - index.md
+      - Bio: home/bio.md
+      # - 术语: GettingStarted/term.md
+      # - 声明: GettingStarted/state.md
+      # - 贡献指南: GettingStarted/contributing.md
+  - AIGC:
+      - aigc/index.md
+  - NLP:
+      - nlp/index.md
+  - ML/DL:
+      - ml/index.md
+  - Mac: 
+      - mac/index.md
+  - Linux: 
+      - linux/index.md
+  - Networking: 
+      - networking/index.md
+  - Game: 
+      - game/index.md
 
 # plugins:
 #   - social
@@ -33,11 +80,11 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/james-willett
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/TheJamesWillett
+      link: https://github.com/csl122
+    # - icon: fontawesome/brands/twitter
+    #   link: https://twitter.com/csl122
     - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/willettjames/
+      link: https://www.linkedin.com/in/csl122/
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -55,6 +102,7 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
-
+  - pymdownx.tabbed:
+      alternate_style: true
 copyright: |
   &copy; 2023 <a href="https://github.com/csl122"  target="_blank" rel="noopener">Shiliang Chen</a>
