@@ -6,6 +6,8 @@ repo_url: 'https://github.com/csl122/mkdocs'
 edit_uri: edit/main/docs/
 theme:
   name: material
+  favicon: images/avt.png
+  logo: images/avt.png
   features:
     - navigation.tabs
     - navigation.top
@@ -36,7 +38,7 @@ theme:
       primary: black
       accent: cyan
   icon:
-    logo: material/apple-keyboard-command
+    # logo: material/apple-keyboard-command
     repo: fontawesome/brands/github
     admonition:
       note: octicons/tag-16
@@ -78,6 +80,7 @@ nav:
 #   - social
 
 extra:
+  homepage: https://csl122.com
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/csl122
