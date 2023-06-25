@@ -1,4 +1,4 @@
-# Colin's Space - コリンのスペース
+# Colin's Space
 
 This is a place for me to keep track of my learning progress and share my thoughts with others.
 
