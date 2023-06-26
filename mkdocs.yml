@@ -2,8 +2,8 @@ site_name: コリンのスペース
 site_description: Colin's Space
 site_url: 'https://csl122.com/'
 site_author: Shiliang Chen
-repo_url: 'https://github.com/csl122/mkdocs'
-edit_uri: edit/main/docs/
+# repo_url: 'https://github.com/csl122/mkdocs'
+# edit_uri: edit/main/docs/
 theme:
   name: material
   favicon: images/avt.png
@@ -73,6 +73,8 @@ nav:
       - ML for Imaging: ml/Machine Learning for Imaging.md
       - NumPy: ml/numpy.md
       - PyTorch: ml/PyTorch.md
+  - Project:
+      - project/index.md
   - Mac: 
       - mac/index.md
       - Mac: mac/Mac.md
@@ -88,6 +90,9 @@ nav:
       - Nginx Proxy Manager: networking/Nginx Proxy Manager.md
   - Game: 
       - game/index.md
+  - Miscellaneous:
+      - misc/index.md
+      - References: misc/mkdocs.md
 
 # plugins:
 #   - social
