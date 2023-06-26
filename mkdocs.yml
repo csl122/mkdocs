@@ -63,16 +63,29 @@ nav:
       # - 贡献指南: GettingStarted/contributing.md
   - AIGC:
       - aigc/index.md
+      - Stable Diffusion: aigc/Stable Diffusion.md
   - NLP:
       - nlp/index.md
+      - Natural Language Processing: nlp/Natural Language Processing.md
   - ML/DL:
       - ml/index.md
+      - Deep Learning: ml/Deep Learning.md
+      - ML for Imaging: ml/Machine Learning for Imaging.md
+      - NumPy: ml/numpy.md
+      - PyTorch: ml/PyTorch.md
   - Mac: 
       - mac/index.md
+      - Mac: mac/Mac.md
   - Linux: 
       - linux/index.md
+      - Vim: linux/Vim.md
+      - AstroNvim: linux/AstroNvim.md
+      - Starship: linux/Starship.md
+      - Tmux: linux/Tmux.md
   - Networking: 
       - networking/index.md
+      - Nginx: networking/Nginx.md
+      - Nginx Proxy Manager: networking/Nginx Proxy Manager.md
   - Game: 
       - game/index.md
 
