@@ -93,6 +93,7 @@ nav:
   - Miscellaneous:
       - misc/index.md
       - References: misc/mkdocs.md
+      - 23W26: misc/23W26.md
 
 # plugins:
 #   - social
