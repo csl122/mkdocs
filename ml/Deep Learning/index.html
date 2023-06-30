@@ -1,0 +1,2042 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Colin's Space">
+      
+      
+        <meta name="author" content="Shiliang Chen">
+      
+      
+        <link rel="canonical" href="https://csl122.com/ml/Deep%20Learning/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../Machine%20Learning%20for%20Imaging/">
+      
+      <link rel="icon" href="../../images/avt.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
+    
+    
+      
+        <title>Deep Learning - コリンのスペース</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="cyan">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deep-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://csl122.com" title="コリンのスペース" class="md-header__button md-logo" aria-label="コリンのスペース" data-md-component="logo">
+      
+  <img src="../../images/avt.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            コリンのスペース
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deep Learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../aigc/" class="md-tabs__link">
+        AIGC
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../nlp/" class="md-tabs__link">
+        NLP
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        ML/DL
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../project/" class="md-tabs__link">
+        Project
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../mac/" class="md-tabs__link">
+        Mac
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../linux/" class="md-tabs__link">
+        Linux
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../networking/" class="md-tabs__link">
+        Networking
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../game/" class="md-tabs__link">
+        Game
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../misc/" class="md-tabs__link">
+        Miscellaneous
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://csl122.com" title="コリンのスペース" class="md-nav__button md-logo" aria-label="コリンのスペース" data-md-component="logo">
+      
+  <img src="../../images/avt.png" alt="logo">
+
+    </a>
+    コリンのスペース
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">Home</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/bio/" class="md-nav__link">
+        Bio
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../aigc/">AIGC</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          AIGC
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aigc/Stable%20Diffusion/" class="md-nav__link">
+        Stable Diffusion
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../nlp/">NLP</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          NLP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nlp/Natural%20Language%20Processing/" class="md-nav__link">
+        Natural Language Processing
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">ML/DL</a>
+          
+            <label for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          ML/DL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Deep Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Deep Learning
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w_outw_in1s12p1k1" class="md-nav__link">
+    \(W_{out}​=(W_{in​}−1)×s[1]−2×p[1]+k[1]\)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pdf-pdf" class="md-nav__link">
+    PDF #PDF
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#info" class="md-nav__link">
+    Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syllabus" class="md-nav__link">
+    Syllabus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    Links
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Machine%20Learning%20for%20Imaging/" class="md-nav__link">
+        ML for Imaging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../numpy/" class="md-nav__link">
+        NumPy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorch/" class="md-nav__link">
+        PyTorch
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../project/">Project</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Project
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../mac/">Mac</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Mac
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mac/Mac/" class="md-nav__link">
+        Mac
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../linux/">Linux</a>
+          
+            <label for="__nav_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Linux
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/Vim/" class="md-nav__link">
+        Vim
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/AstroNvim/" class="md-nav__link">
+        AstroNvim
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/Starship/" class="md-nav__link">
+        Starship
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/Tmux/" class="md-nav__link">
+        Tmux
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../networking/">Networking</a>
+          
+            <label for="__nav_8">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Networking
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking/Nginx/" class="md-nav__link">
+        Nginx
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networking/Nginx%20Proxy%20Manager/" class="md-nav__link">
+        Nginx Proxy Manager
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../game/">Game</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Game
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../misc/">Miscellaneous</a>
+          
+            <label for="__nav_10">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Miscellaneous
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/mkdocs/" class="md-nav__link">
+        References
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/23W26/" class="md-nav__link">
+        23W26
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    Notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w_outw_in1s12p1k1" class="md-nav__link">
+    \(W_{out}​=(W_{in​}−1)×s[1]−2×p[1]+k[1]\)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pdf-pdf" class="md-nav__link">
+    PDF #PDF
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#info" class="md-nav__link">
+    Info
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syllabus" class="md-nav__link">
+    Syllabus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    Links
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="deep-learning">Deep Learning</h1>
+<p>tags:: IC, Course, ML, Uni-S10
+alias:: DL
+Ratio: 5:5
+Time: 星期五 9:00 - 11:00</p>
+<ul>
+<li>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>术语表<ul>
+<li>LVM: Latent Variable Model 隐变量模型</li>
+<li>GMM: Gaussian Mixture Model 高斯混合模型</li>
+<li>VAE: Variational Auto-encoder 变分自编码器</li>
+<li>GAN: Generative Adversarial Network 生成式对抗网络</li>
+<li>PCA: Principal Component Analysis 主成分分析</li>
+<li>KL Divergence: Kullback-Leibler divergence KL散度</li>
+<li>ELBO: evidence lower bound</li>
+</ul>
+</li>
+<li>Week2 Curse of dimensionality &amp; Convolution &amp; Padding &amp; Strides
+  collapsed:: true<ul>
+<li>Slides
+  collapsed:: true<ul>
+<li>Curse of dimensionality<ul>
+<li>As the number of features or dimensions grows,
+  the amount of data we need to generalise accurately grows exponentially!</li>
+<li>[[Lipschitz]] continuous function<ul>
+<li>在<a href="https://zh.wikipedia.org/wiki/%E6%95%B8%E5%AD%B8">数学</a>中，特别是<a href="https://zh.wikipedia.org/wiki/%E5%AF%A6%E5%88%86%E6%9E%90">实分析</a>，<strong>利普希茨连续</strong>（Lipschitz continuity）以德国数学家<a href="https://zh.wikipedia.org/wiki/%E9%B2%81%E9%81%93%E5%A4%AB%C2%B7%E5%88%A9%E6%99%AE%E5%B8%8C%E8%8C%A8">鲁道夫·利普希茨</a>命名，是一个比一致<a href="https://zh.wikipedia.org/wiki/%E9%80%A3%E7%BA%8C%E5%87%BD%E6%95%B8">连续</a>更强的光滑性条件。直觉上，利普希茨连续函数限制了函数改变的速度，符合利普希茨条件的函数的斜率，必小于一个称为利普希茨常数的实数（该常数依函数而定）</li>
+</ul>
+</li>
+<li><img alt="image.png" src="../assets/image_1674811744802_0.png" /></li>
+<li><img alt="image.png" src="../assets/image_1674208253741_0.png" /></li>
+<li>例如说我们需要20%的数据来帮助KNN来决定哪个label, 1d的情况只需要0.2个单位, 但是如果是2d就需要0.45^2约等于0.2; 也就是说, 两个维度都需要0.45个单位大小来获得0.2的数据量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Notes
+  collapsed:: true<ul>
+<li>Leo Breiman 100 observations cover well the one-dimensional space of real numbers between 0 and 1.</li>
+<li>To achieve a similar coverage as in one-dimensional space, 100^10 = 10^20 samples must be taken for 10-dimensional space, which results in a much higher effort.</li>
+<li>Formulation of <strong>curse</strong>: different kinds of random distributions of the data sets, the difference between the smallest and the largest distance between data sets becomes arbitrarily small compared to the smallest distance if the dimensionality d increases (in other words, the smallest and largest distance differ only relatively little). 纬度越大, 最小距离和最大距离的差距会越小, 因为维度大上去以后, 大家都得跨越千山万水, 因此在这种情况, 普通的距离函数的作用就不大了</li>
+<li>还有一种<strong>curse</strong>的描述是, 高纬sphere和高纬cube之间的比值, 会随着维度的增加急剧缩小, 点和中心的距离会特别大<ul>
+<li><em>"the volume of a high dimensional orange is mostly in its skin, not the pulp!"</em></li>
+<li>the volume of the hypersphere becomes very small (”insignificant”) compared to the volume of the hypercube with increasing dimension</li>
+<li>为什么高纬度对clustering method不友好: the number of dimensions increase, <strong>points move further away from each other</strong>, which causes <em>sparsity</em> (large unknown subspaces) and common distance measures to break down. 因此是不是可以认为dense space could still be used for clustering analysis with distance measures? #Question</li>
+<li><img alt="image.png" src="../assets/image_1674210238478_0.png" /></li>
+</ul>
+</li>
+<li><img alt="image.png" src="../assets/image_1674210765518_0.png" /></li>
+<li>Weight sharing<ul>
+<li>The weights of this network are sparse and spatially shared.</li>
+<li>These shared weights can be interpreted as weights of a filter function. The input tensor is convoluted with this filter function (c.p. sliding window filter) before the activation of a convolutional layer.</li>
+</ul>
+</li>
+<li>Why convolution flip?<ul>
+<li>In NN, no flip for convenience.</li>
+<li>When performing the convolution, you want the kernel to be flipped with respect to the axis along which you're performing the convolution because if you don't, you end up computing a correlation of a signal with itself.</li>
+</ul>
+</li>
+<li>[[Padding]] and [[Stride]] #convolution #[[transposed convolution]]<ul>
+<li>[[Convolution]]<ul>
+<li>Assuming padding of size p, no stride<ul>
+<li><span class="arithmatex">\(o_j=i_j-k_j+2p+1\)</span></li>
+<li>例如原图是5, kernal是4, padding是2, output就是5-4+4+1 = 6</li>
+</ul>
+</li>
+<li>Assuming padding of size p, stride <span class="arithmatex">\(s_j\)</span><ul>
+<li><span class="arithmatex">\(o_j=[(i_j-k_j+2p)/s_j]+1\)</span></li>
+<li>例如原图是5, kernal是3, padding是1, stride是2, output就是 (5 − 3 + 2)/2 + 1 = 3</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[[Transposed Convolution]]<ul>
+<li>转置卷积刚刚说了，主要作用就是起到上采样的作用。但转置卷积不是卷积的逆运算（一般卷积操作是不可逆的），它只能恢复到原来的大小（shape）数值与原来不同。转置卷积的运算步骤可以归为以下几步：<ul>
+<li>在输入特征图元素间填充s-1行、列0（其中s表示转置卷积的步距）</li>
+<li>在输入特征图四周填充k-p-1行、列0（其中k表示转置卷积的kernel_size大小，p为转置卷积的padding，注意这里的padding和卷积操作中有些不同）</li>
+</ul>
+</li>
+<li>例如:<ul>
+<li>下面假设输入的特征图大小为2x2（假设输入输出都为单通道），通过转置卷积后得到4x4大小的特征图。这里使用的转置卷积核大小为k=3，stride=1，padding=0的情况（忽略偏执bias）。<ul>
+<li>首先在元素间填充s-1=0行、列0（等于0不用填充）</li>
+<li>然后在特征图四周填充k-p-1=2行、列0</li>
+</ul>
+</li>
+<li><img alt="image.png" src="../assets/image_1677841056401_0.png" /></li>
+</ul>
+</li>
+<li>GIF<ul>
+<li><img alt="dbb10ea62b89456ca567eb69fd31d18b.gif" src="../assets/dbb10ea62b89456ca567eb69fd31d18b_1677841196071_0.gif" /></li>
+<li><img alt="94191375edb942a087c54173a1dd4e75.gif" src="../assets/94191375edb942a087c54173a1dd4e75_1677841111552_0.gif" /></li>
+<li><img alt="dc6050f7df5042f886054f16d8e522d1.gif" src="../assets/dc6050f7df5042f886054f16d8e522d1_1677841177478_0.gif" /></li>
+</ul>
+</li>
+<li>计算:</li>
+<li><span class="arithmatex">\(o = (i-1) \times s - 2p + k\)</span></li>
+<li><span class="arithmatex">\(H_{out​}=(H_{in​}−1)×s[0]−2×p[0]+k[0]\)</span></li>
+<li>
+<h2 id="w_outw_in1s12p1k1"><span class="arithmatex">\(W_{out}​=(W_{in​}−1)×s[1]−2×p[1]+k[1]\)</span></h2>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Week3 Invariance &amp; equivariance &amp; LeNet, AlexNet, VGG
+  collapsed:: true<ul>
+<li>Slides<ul>
+<li>Invariance &amp; equivariance<ul>
+<li>不变性和等变性</li>
+<li>指的是输出随着输入的变化变不变的性质</li>
+<li>CNN 拥有approximate shift equivariance, 是通过convolution layers实现的, 因为原图的移动, conv完后的feature map也会拥有同样的移动</li>
+<li>CNN 拥有approximate shift invariance, 是通过pooling 和striding实现的, 因为locally max pooling的结果会是一样的, 那么输出就不会变化, 如果尺度大的话, 有解决方法例如blurring<ul>
+<li>But striding ignores the [[Nyquist]] sampling theorem and aliases 采样率不够, 就会出现问题</li>
+</ul>
+</li>
+<li>CNN也对deformation invariance, 例如数字3的一些小细节上面的小变动, 是不影响cnn的分类输出的</li>
+<li>传统CNN 无法做到rotation equivariance, 因为旋转以后的分布变化会导致feature map产生大的不同</li>
+</ul>
+</li>
+<li>LeNet<ul>
+<li><img alt="image.png" src="../assets/image_1674772072380_0.png" /></li>
+<li>AlexNet<ul>
+<li>Key modifications:
+  • Add a dropout layer after two hidden dense layers
+  (better robustness / regularization)
+  SVM
+  Softmax regression
+  • Change activation function from sigmoid to ReLu
+  (no more vanishing gradient)
+  • MaxPooling
+  • Heavy data augmentation
+  • Model ensembling</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>VGG<ul>
+<li>Deep and narrow = better</li>
+<li>a larger number of compositions of simple functions turns out to be more expressive and more able to fit meaningful models than a small number of shallower and more complicated functions.</li>
+<li><img alt="image.png" src="../assets/image_1674772249868_0.png" /></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Notes<ul>
+<li>The [[Nyquist]] rate<ul>
+<li>Samples must be taken at a rate that is twice the frequency of the highest frequency component to be reconstructed.</li>
+<li>Under-sampling: sampling at a rate that is too coarse, i.e., is below the Nyquist rate.</li>
+<li>Aliasing: artefacts (jaggies) that result from under-sampling.</li>
+</ul>
+</li>
+<li>图片的frequency其实就是 gradient, edge就是gradient大的地方, 就是高频部分, 平滑区域就是低频部分, 可以通过不同频率的不断采样reconstruct</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Week4 NiN, ResNet, Inception, BatchNorm, Activations, Loss, Augmentation, U-net
+  collapsed:: true</p>
+<ul>
+<li>Slides<ul>
+<li>Parameters of Convolution layers<ul>
+<li><span class="arithmatex">\(c_i \times c_0 \times k^2\)</span></li>
+<li>computation就是前面乘上feature map的大小像素个数 <span class="arithmatex">\(m_h \times m_w\)</span></li>
+</ul>
+</li>
+<li>Parameters of fully connected layer connected with conv and output<ul>
+<li><span class="arithmatex">\(c \times m_w \times m_h \times n\)</span></li>
+</ul>
+</li>
+<li>Networks in Networks<ul>
+<li>NiN设计在conv层中间加入MLP来获取更多conv信息</li>
+<li>实现中, MLP使用了conv 1x1来作为mlp</li>
+<li><img alt="image.png" src="../assets/image_1675269160886_0.png" /></li>
+<li>global average pooling<ul>
+<li>全局平均池化, 对于每一个channel中的所有数据取平均得到唯一的一个值, 也就是几个频道就有几个值, 而一般这个频道数会事先设定为类别数, 直接建立起了conv结果与类别的关系. 取平均是为了保留该通道全局信息, 而不是最显著信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Inception (GooLeNet)<ul>
+<li>inception net的思想就是把该用什么样的卷积核大小个数padding stride直接交给网络去优化, 每一条path只要保证去其他的形状一致即可, 输出通道数是不一样的, 最后延通道拼接起来. 期待每个channel都能work for 特定的任务 have an architecture with different channels doing different things and the hope is one of those channels is gonna work for the cats and one is gonna work for I some birds and so on.</li>
+<li><img 200_="200," 654="654" :width=":width" alt="image.png" height="height" src="../assets/image_1675269431882_0.png" /></li>
+<li><img alt="image.png" src="../assets/image_1675269577123_0.png" /></li>
+<li>由于是不同类型的卷积核concat, 能够大大减少由单一卷积核生成导致的大量参数问题</li>
+<li><img alt="image.png" src="../assets/image_1675270290983_0.png" /></li>
+<li>神经网络第一层通常会采用例如77的conv和maxpool, 其作用在于have some basic
+  amount of translation invariance and that I am able to reduce the dimensionality reasonably quickly 平移不变性, 减少特征空间大小;</li>
+<li>第二个阶段一般会做简单的33卷积和maxpool来获得总体的空间上的关联get some overall spatial correlation and then some pooling operation in the end.</li>
+<li>剩余的步骤可以理解为减少pixels, 但是让他们拥有更多高层次的有用的信息shrinking resolution but I'm also increasing the number of channels because now while I have fewer pixels they have more valuable more higher- order information that I'm going to use later on.</li>
+<li>用两个33conv代替55可以减少参数量, 但是具有相同的感受野</li>
+<li>V3版本中还用了17 71 conv, you might only get for example vertically contiguous features in some way</li>
+<li>学到了什么?<ul>
+<li>Dense layers are computationally and memory intensive</li>
+<li>1x1 convolutions act like a multi-layer perceptron per pixel.</li>
+<li>If not sure, just take all options and let the optimization decide or even learn this through trial and error (genetic algorithm, AmoebaNet)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>BatchNorm</p>
+<ul>
+<li>the trouble is as I'm adapting from the top down, the features are going back up, are going to change so now that last layer that was actually fairly well adapted to begin with, has to readapt now to the new inputs that it's getting. long time to converge and adopt all layers.</li>
+<li><img alt="image.png" src="../assets/image_1675270979934_0.png" /></li>
+<li>BN在训练中, 每个batch都会以channel算出一个整个batch的mean 和variance, 比如3个通道, 就会有三个mean 和variance, 然后所有的数据根据这个值来进行normalise
+  测试中, 则使用训练过程中不断更新的running mean 和variance进行normalise, 也就是整个数据集的, 是在一个个batch iter中类似于temporal difference 更新的, 代码如下 #BatchNorm #ML<ul>
+<li>
+<p>```python
+  class BatchNorm2d(nn.Module):
+      def <strong>init</strong>(self, num_features, eps=1e-05, momentum=0.1):
+          super(BatchNorm2d, self).<strong>init</strong>()
+          """
+          An implementation of a Batch Normalization over a mini-batch of 2D inputs.</p>
+<div class="highlight"><pre><span></span><code>  The mean and standard-deviation are calculated per-dimension over the
+  mini-batches and gamma and beta are learnable parameter vectors of
+  size num_features.
+
+  Parameters:
+  - num_features: C from an expected input of size (N, C, H, W).
+  - eps: a value added to the denominator for numerical stability. Default: 1e-5
+  - momentum: the value used for the running_mean and running_var
+  computation. Default: 0.1 . (i.e. 1-momentum for running mean)
+  - gamma: the learnable weights of shape (num_features).
+  - beta: the learnable bias of the module of shape (num_features).
+  &quot;&quot;&quot;
+  # TODO: Define the parameters used in the forward pass                 #
+  # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+  self.num_features = num_features
+  self.eps = eps
+  self.momentum = momentum
+
+  # self.register_parameter is not used as it was mentioned on piazza
+  # that this will be overridden
+  self.gamma = torch.ones((1, num_features, 1, 1))
+  self.beta = torch.zeros((1, num_features, 1, 1))
+  self.running_mean = torch.zeros((1, num_features, 1, 1))
+  self.running_var = torch.ones((1, num_features, 1, 1))
+</code></pre></div>
+<p># <strong><em>*</em>END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)</strong>***</p>
+<p>def forward(self, x):
+      """
+      During training this layer keeps running estimates of its computed mean and
+      variance, which are then used for normalization during evaluation.
+      Input:
+      - x: Input data of shape (N, C, H, W)
+      Output:
+      - out: Output data of shape (N, C, H, W) (same shape as input)
+      """
+      # TODO: Implement the forward pass                                     #
+      #       (be aware of the difference for training and testing)          #
+      # <strong><em>*</em>START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)</strong>***
+      if self.training:
+          mean = x.mean(dim=(0, 2, 3), keepdim=True)
+          var = x.var(dim=(0, 2, 3), keepdim=True)</p>
+<div class="highlight"><pre><span></span><code>      x_hat = (x-mean)/torch.sqrt(var+self.eps)
+      self.running_mean = self.momentum * mean + (1-self.momentum) * self.running_mean
+      self.running_var = self.momentum * var + (1-self.momentum) * self.running_var
+  else:
+      x_hat = (x-self.running_mean)/torch.sqrt(self.running_var+self.eps)
+
+  x = self.gamma * x_hat + self.beta
+  # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+  return x
+                  ```
+            - **capacity control**: it does not really reduce covariate shift. they find out that it actually makes covariate shift worse. it actually turns out that basically this is doing regularization by noise injection. a mini batch of maybe 64 observations and so what you’re effectively doing is you’re subtracting some empirical mean and that&#39;s obviously noisy. And you’re dividing by some empirical standard deviation. That&#39;s obviously also noisy.
+            - Batch Norm对batch size 敏感:
+                - batch that’s too large then you&#39;re not injecting enough noise and you&#39;re not regularizing enough.
+                - one that’s too small then basically the noise becomes too high and then you’re not converging very well.
+                - 但是已经通过gamma和beta来修正解决了a learned scale and offset.
+        - ResNet
+            - ![image.png](../assets/image_1675271910997_0.png)
+            - ![image.png](../assets/image_1675271930329_0.png)
+            - ‘Taylor expansion’ style parametrization
+            - it also means that as I add another layer, the identity function still goes through and it will still leave the outputs of the previous layers unchanged.
+            - ResNet通常四个layer, 每个layer最开始的那个block因为需要对齐残差结构的输入和输出, 需要上面图中的11conv来进行频道对齐以及downsample
+        - ResNext
+            - ![image.png](../assets/image_1675272224692_0.png)
+            - So what we are doing is basically taking the network on the left, and slicing it up into 16 or more networks that just have four channels, or some larger number of channels each. And then in the end, we stack everything together. 减少了参数个数, 通过分组的方式
+            - ![image.png](../assets/image_1675272362556_0.png)
+        - DenseNet
+            - ![image.png](../assets/image_1675272406263_0.png)
+            - ![image.png](../assets/image_1675272469553_0.png)
+        - Squeeze-Excite Net
+            - ![image.png](../assets/image_1675272880491_0.png)
+            - So attention is essentially a mechanism where, rather than taking averages over a bunch of vectors, we&#39;re using a separate function to gate how that average should be computed. attention 定义了这个average的操作怎么做
+            - SE-Net做的事情就是, 例如有很多频道, 这个频道是专攻cat的, 另一个是恐龙, 当你预测猫咪的时候肯定要weight 猫咪多一点, 所以这个网络就是在learn global weighting function per channel. 但是我们如果看到有一碗牛奶的时候, 那有猫咪的可能性就会高很多, 这就是一个思路, 把channel之间的信息链接起来
+            - What you could actually do is you could take very simply a product of the entire image in a per channel basis, with some other vector. 相当于知道了关联度. Finally you use those numbers and the softmax over them to rewrite your channels.
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<p>So therefore, if this very cheap procedure tells me, well, there's a good chance that there's a cat somewhere, I can now up weigh the cat channel.
+    -
+            - ShuffleNet
+- <img alt="image.png" src="../assets/image_1675272976241_0.png" />
+- we do something a little bit more structured, or, more sparse, structured with our networks.
+- if we have three channels, well, we go and basically pick, one from the red greens and blues and turn that into a new block.
+  And then I essentially intertwine things in a meaningful way.
+- Efficient on mobile devices
+            - Activation functions
+- Linear activation
+    - <img alt="image.png" src="../assets/image_1675273197243_0.png" />
+    - if all are linear in nature, the final activation function of last layer is nothing but just a linear function of the input of first layer!
+    - That means these N linearly activated layers can be replaced by a single layer.
+      No matter how we stack, the whole network is still equivalent to a single layer with linear activation
+- Sigmoid function
+  <img alt="image.png" src="../assets/image_1675273291921_0.png" />
+    - looks smooth and “step function like”
+    - has a tendency to bring the Y values to either end of the curve.
+    - Making clear distinctions on prediction.
+    - the Y values tend to respond very less to changes in X. What does that mean? The gradient at that region is going to be small. It gives rise to a problem of “vanishing gradients”.
+      This meant the network may refuse to learn further or is drastically slow.
+- tanh function
+    - <img alt="image.png" src="../assets/image_1675273339650_0.png" />
+    - One advantage of tanh is that we can expect the output to be close to have a zero-mean.
+    - because they see positive and negative values and therefore tend to converge faster.
+    - Deciding between the sigmoid or tanh will depend on your requirement of gradient strength.
+    - 不能stack太多
+- ReLU
+    - <img alt="image.png" src="../assets/image_1675273692839_0.png" />
+    - It is not bound and the range of ReLu is [0, inf). This means it can blow up the activation.
+      the sparsity of the activation can also be a problem in networks.
+    - We would ideally want a few neurons in the network to not activate and thereby making the activations sparse and efficient.
+      RELU allows this.
+    - Because of the horizontal line in ReLu( for negative X ), the gradient can go towards 0. For activations in that region of ReLu, gradient will be 0 because of which the weights will not get adjusted during descent. That means, those neurons which go into that state will stop responding to variations in error/ input. This is called dying ReLu problem. This problem can cause several neurons to just die and not respond making a substantial part of the network passive.
+    - ReLu is less computationally expensive than tanh and sigmoid because it involves simpler mathematical operations.
+- Leaky ReLU
+    - <img alt="image.png" src="../assets/image_1675273758735_0.png" />
+    - for example y = 0.01x for x&lt;0 will make it a slightly inclined line rather than horizontal line. This is leaky ReLu. There are other variations too. The main idea is to let the gradient be non zero and recover during training eventually.
+- PReLU
+    - <img alt="image.png" src="../assets/image_1675273805475_0.png" />
+    - Here a is a learnable parameter.
+    - What’s interesting about the ReLus is that they are scale invariant.
+      You can multiply the signal by a value and the output will not be changed, except the scale. So these are equivariant to scale. There is only one linearity.
+- SoftPlus
+    - <img alt="image.png" src="../assets/image_1675273849200_0.png" />
+    - Functions like these here are affected by the amplitude of the input signal.
+    - Softplus is a smooth approximation of the ReLU function. A differentiable version of ReLU.
+    - It has a scale parameter beta. The higher beta, the more this function will look like a ReLU.
+      It can be used to constrain the output of a unit to always be positive.
+- ELU
+    - <img alt="image.png" src="../assets/image_1675273902630_0.png" />
+    - Another soft version of RELU. You use Relu as a basis and add a small constant that makes it smooth.
+    - One difference is that this one here can become negative, unlike the RELu.
+      That may have an advantage but very much depends on the application it is used for. Allows the network to make the average of the output zero, which can help convergence.
+- CELU
+    - <img alt="image.png" src="../assets/image_1675273941843_0.png" />
+    - <img alt="image.png" src="../assets/image_1675273954685_0.png" />
+- SELU
+    - <img alt="image.png" src="../assets/image_1675273977136_0.png" />
+- GELU
+    - <img alt="image.png" src="../assets/image_1675273992870_0.png" />
+- ReLU6
+    - <img alt="image.png" src="../assets/image_1675274005460_0.png" />
+- LogSigmoid
+    - <img alt="image.png" src="../assets/image_1675274021411_0.png" />
+- Softmin
+    - <img alt="image.png" src="../assets/image_1675274032679_0.png" />
+- Softmax
+    - <img alt="image.png" src="../assets/image_1675274042775_0.png" />
+- LogSoftmax
+    - <img alt="image.png" src="../assets/image_1675274053809_0.png" />
+- Which function to use depends on the nature of the targeted problem. Most often you will be fine with ReLUs for classification problems. If the network does not converge, use leakyReLUs or PReLUs, etc. Tanh is quite ok for regression and continuous reconstruction problems.
+            - Loss
+- <img alt="image.png" src="../assets/image_1675299602450_0.png" />
+- <img alt="image.png" src="../assets/image_1675299610352_0.png" />
+- <img alt="image.png" src="../assets/image_1675299817956_0.png" />
+- <img alt="image.png" src="../assets/image_1675299824732_0.png" />
+- <img alt="image.png" src="../assets/image_1675299833192_0.png" />
+- <img alt="image.png" src="../assets/image_1675299838997_0.png" />
+- <img alt="image.png" src="../assets/image_1675299848521_0.png" />
+- <img alt="image.png" src="../assets/image_1675299861572_0.png" />
+- <img alt="image.png" src="../assets/image_1675299871627_0.png" />
+- <img alt="image.png" src="../assets/image_1675299879651_0.png" />
+    -
+            - U-net
+- <img alt="image.png" src="../assets/image_1675299996606_0.png" />
+            - Augmentation
+- <img alt="image.png" src="../assets/image_1675300007063_0.png" />
+- <img alt="image.png" src="../assets/image_1675300014671_0.png" />
+        - Notes
+            - mini batch的用法由来
+- 没有办法把整个datasset放进来, 只能random sample 一些, 来作为估计
+- 但是后来发现这个还有regularisation作用, 每个batch有自己的分布, 导致weights不准了
+    - Week5 Generative models, VAE, GAN
+        - Unsupervised learning: Given data without supervision signal, goal is to infer a function that describes the hidden structure of unlabelled data
+            - • Probability distribution/density estimation
+              • Dimensionality Reduction 
+              • Clustering
+        - Probability distribution/density estimation
+            - <img alt="image.png" src="../assets/image_1676114034268_0.png" />
+            - 数据是从某个分布中才养出来的, 我们的目的是学习一个分布参数, 能让这个分布模型生成出来的数据分布和原数据分布很像
+        - Generative Latent Variable Models
+            - <img alt="image.png" src="../assets/image_1676114228274_0.png" />
+            - z是隐变量, 观测不到的一些潜在分布属性, 可以用来代表一类的samples, 例如可以是写的字的label, 书写风格, 相机的角度, 光照条件, x是通过这些东西决定生成的实际分布结果的
+            - x是可观测变量, 即为观测到的结果, 例如生成的数字, 实际的照片
+            - p(z)是先验, 需要先知道才能有后续生成, 我们假定他服从一定的概率分布, 来表示某一类的sample的先验潜在变量
+            - p(x|z)是似然, 是给定z后x出现的概率
+            - p(x)是evidence, 在这个问题背景下, 也是我们要拟合的对象, 通过sample z, 加起来expectation就是p(x), 也就是上图的推导式子
+            - p(z|x)是后验, 是得到x以后, 某个z出现的概率, 我们希望能用这个模型sample出与x高度相关的z来帮助生成有用的x
+        - Dimensionality reduction (Prob PCA)
+            - <img alt="image.png" src="../assets/image_1676115292249_0.png" />
+            - 用概率学来进行主成分分析, 对原本数据的d维度降维到k, z就是k维的可以表征一大类x的隐变量 存有绝大多数有用的信息, 因此可以用来复原x.
+            - 这里第二行就是想要学习一个映射关系, 以期把k维度的z恢复成d维的x, 也就是x conditioned on z
+            - z也是需要建模的, 因为我们不知道哪些z是有用的z, 是包含了主要成分的z, 而符合某一个分布的z就可能满足响应的要求, 能够被第二个式子中的W给有效恢复成可行的x
+            - 生成Z的过程就是降维, encoder的过程
+            - 从z生成x 的过程就是升维, decode的过程
+        - Jensen's inequality:
+            - <img alt="image.png" src="../assets/image_1676116036467_0.png" />
+            - 注意: 如果是下凹函数的话, 这个不等式的大于等于就是小于等于了, 例如log
+        - Divergence minimisation (KL divergence)
+            - <img alt="image.png" src="../assets/image_1676115811106_0.png" />
+            - <span class="arithmatex">\(KL[p(x)||q(x)]\ =\ E_{p(x)}[log\frac{p(x)}{q(x)}]\)</span>
+            - <img alt="image.png" src="../assets/image_1676116070392_0.png" />
+        - Maximum Likelihood Estimation
+            - <img alt="image.png" src="../assets/image_1676116224094_0.png" />
+            - 这个简单理解就是, KL divergence其实就是让theta下的prob最接近真实情况, 所以就是MLE, 从data中采样的点, 在我们的概率模型中出现的概率最大化, 那就是很接近了
+        - ((63e78193-b63d-4865-b333-a0759ae6f935))
+            - ((63e78203-d202-469c-9dd8-1185c4cbb85d))
+            - 我们的p(x)的建立, 需要p(z)这个先验, 但是我们没办法做到sample所有可能的z, 而且与x无关的z只会带来无用的噪音, 因此我们需要用到后验p(z|x)来找到适合的z
+        - [[VAE]]
+            - References: <a href="https://zhuanlan.zhihu.com/p/348498294?utm_id=0">机器学习方法—优雅的模型（一）：变分自编码器（VAE） - 知乎</a>
+            - ((63e782cc-b656-4ffa-8c6e-63a2ca501ad0))
+            - ((63e782f0-897d-43d3-bfb4-5753ec863a3c))
+            - ((63e782fd-6145-4156-b8b2-7d112b470d1c))
+            - ((63e7830d-d431-463f-8f8c-2a92414de066))
+            - ((63e7831c-09a9-43e3-8b78-819d4dd176c4))
+- 原本是采样z来进行训练, 没有办法进行BP, 但是我们通过epsilon这个从高斯分布中采样的东西来改变z的方差, 来获得不同的z样本, 因为epsilon是一个常量, 就不用担心BP的问题了
+- ((63e78419-fa60-4c52-91d5-cb831af8bb52))
+            - 下面讲两个推出Loss的方式
+            - ((63e78343-7822-49c1-8424-b2a339b4d13d))
+            - ((63e78350-a414-4295-ab0f-e8d999023d5b))
+            - ((63e7836c-9a5e-438a-8dc0-f782dbdb53dd))
+            - VAE objective
+- ((63e78381-3db8-4b4e-9bce-7e3201dda44a))
+            - 我们需要给encoder 定义一个需要学习的分布的标准 q distribution design
+- ((63e783a9-82ca-405d-8757-d0d2985b54a1))
+- 复杂的, 不同的分布假设, 会带来不一样的结果
+            - <img alt="image.png" src="../assets/image_1676117078580_0.png" />
+- 最终的Loss考虑到了reconstruction loss, 即极大似然部分, 生成数据和数据集的相似程度, 以及KL regulariser, 用来让我们设计的encoder中的q接近我们期望的真实隐变量分布p(z)
+            - Practical implementation
+- ((63e78506-afdc-486f-82f4-914c0d7608e0))
+        - [[GAN]]
+            - <img alt="image.png" src="../assets/image_1676117573867_0.png" />
+            - Two-player game objective:
+- ((63e78686-63fa-4ba2-ab32-206fdbbb14fa))
+- 对Discriminator 而言, 这个Loss要越大越好, 表示他识别出来了
+- 对Generator而言, 这个Loss要越小越好, 表示不能被认出来我生成的图片
+- <img alt="image.png" src="../assets/image_1676117712973_0.png" />
+- 训练的时候, 固定某一个参数, 训练另一个
+            - Solving the two-player game objective
+- ((63e786ff-afce-47d9-92c9-626bf5e5eef6))
+            - ((63e78726-8149-4648-8cb9-534c26e34832))
+- ((63e78730-bee1-494f-8775-cc1a44382fe0))
+            - Practical implementation for solving
+- ((63e78748-a626-4d85-8f35-3d9bb651073c))
+            - Practical strategy for training the generator G
+- At the beginning, generated image quality is bad, Generator 可以很轻易的识别出来, 难以继续训练了
+- ((63e7879d-c35e-45b4-abca-bf9d841e2daa))
+            - ((63e787a9-d297-450a-b944-35b2356bfc16))
+- ((63e787b7-222e-4a99-9cbe-9c18400d627f))
+- ((63e787d3-c2fe-41bb-99e0-91f287757609))
+- ((63e787e6-8e9a-4d1e-9b6c-8ff984a05cf9))
+    - Week6 RNN, LSTM, Attention, Transformers
+        -
+        -
+    - Week7
+    - Week8
+- ## CW
+  collapsed:: true
+    - GAN
+        * Enlarge the model with more layers and parameters
+        * learning rate scheduler
+        * In GAN, if the discriminator depends on a small set of features to detect real images, the generator may just produce these features only to exploit the discriminator. The optimization may turn too greedy and produces no long term benefit. In GAN, overconfidence hurts badly. To avoid the problem, we penalize the discriminator when the prediction for any real images go beyond 0.9 (D(real image)&gt;0.9). This is done by setting our target label value to be 0.9 instead of 1.0.
+        * larger learning rate for the discriminator
+        * Two Time-Scale Update Rule
+        *  Add noise to the real and generated images before feeding them into the discriminator.
+        *  当GAN生成的图像不够准确、清晰时，可尝试增加卷积层中的卷积核的大小和数量，特别是初始的卷积层。卷积核的增大可以增加卷积的视野域，平滑卷积层的学习过程，使得训练不过分快速地收敛。增加卷积核数（特别是生成器），可以增加网络的参数数量和复杂度，增加网络的学习能力。
+        *  Real=False, fake=True
+        *  leaky for generator
+        *  transfer from VAE
+        *  在dis的卷前加入高斯噪声
+        *  new loss function
+    - * What didn't work, what worked and what mattered most
+        * Add noise to the real and generated images before feeding them into the discriminator.
+        * 在输入图片中加入高斯噪声
+        * dropout</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Are there any tricks you came across in the literature etc. which you suspect would be helpful here</p>
+<ul>
+<li>Wasserstein GANs</li>
+</ul>
+</li>
+<li>
+<h2 id="pdf-pdf">PDF #PDF</h2>
+  collapsed:: true</li>
+<li><img alt="N16a_VAE_Notes.pdf" src="../assets/N16a_VAE_Notes_1676113337238_0.pdf" /></li>
+<li><img alt="N17a_GAN_Notes.pdf" src="../assets/N17a_GAN_Notes_1676117464510_0.pdf" /></li>
+<li><img alt="N16_VAE 2.pdf" src="../assets/N16_VAE_2_1676849158717_0.pdf" /></li>
+<li><img alt="N17_GAN 2.pdf" src="../assets/N17_GAN_2_1676849171594_0.pdf" /></li>
+<li><img alt="N18_RNN 2.pdf" src="../assets/N18_RNN_2_1676849179285_0.pdf" /></li>
+<li>
+<h2 id="_1"><img alt="N20_attention 2.pdf" src="../assets/N20_attention_2_1676849185672_0.pdf" /></h2>
+</li>
+<li>
+<h2 id="info">Info</h2>
+  collapsed:: true</li>
+<li>5:5</li>
+<li>星期五 9:00 - 11:00</li>
+<li>CW: 2 Tasks, both assessed, Task 1: 40%, Task 2: 60%<ul>
+<li><a href="https://www.paperspace.com/">Cloud computing, evolved | Paperspace</a></li>
+<li><a href="https://colab.research.google.com/">Google Colab</a></li>
+<li>答案在两周后公布</li>
+</ul>
+</li>
+<li>Tutorial: 每周都有, 答案周一公布</li>
+<li>
+<h2 id="syllabus">Syllabus</h2>
+  collapsed:: true</li>
+<li>Supervised vs unsupervised learning, generalisation, overfitting</li>
+<li>Perceptrons, including deep vs shallow models</li>
+<li>Stochastic gradient descent and backpropagation</li>
+<li>Convolutional neural networks (CNN) and underlying mathematical principles</li>
+<li>CNN architectures and applications in image analysis</li>
+<li>Recurrent neural networks (RNN), long-short term memory (LSTM), gated recurrent units (GRU)</li>
+<li>Applications on RNNs in speech analysis and machine translation</li>
+<li>Mathematical principles of generative networks; variational autoencoders (VAE); generative adversarial networks (GAN)</li>
+<li>Applications of generative networks in image generation</li>
+<li>Graph neural networks (GNN): spectral and spatial domain methods, message passing</li>
+<li>Applications of GNNs in computational social sciences, high-energy physics, and medicine</li>
+<li>• Feature extraction, convolutions and CNNs
+  • Common Network architectures
+  • Automatic parameter optimisation
+  • RNNs, LSTMs, GRUs
+  • VAEs and GANs
+  • GNNs
+  • Deep learning programming frameworks • Applications of deep learning</li>
+</ul>
+<h2 id="links">Links</h2>
+<p>collapsed:: true
+- <a href="https://scientia.doc.ic.ac.uk/2223/modules/70010/materials">Scientia</a>
+- <a href="http://wp.doc.ic.ac.uk/bkainz/teaching/70010-deep-learning/">70010 Deep Learning | Bernhard Kainz</a>
+- <a href="https://imperial.cloud.panopto.eu/Panopto/Pages/Sessions/List.aspx#folderID=%228631beb3-a0b0-4b5d-b85e-aedd01736de2%22&amp;sortColumn=0&amp;sortAscending=true">Panopto</a>
+- <a href="https://zh.d2l.ai/">《动手学深度学习》 — 动手学深度学习 2.0.0 documentation</a> #书 #科技资源 #ML #DL #tutorial
+- <a href="https://vast.ai/">Rent GPUs | Vast.ai</a>
+- <a href="https://www.paperspace.com/">Cloud computing, evolved | Paperspace</a> #科技资源 #GPU #服务器
+- <a href="https://paperswithcode.com/sota/">Browse the State-of-the-Art in Machine Learning | Papers With Code</a>
+- #科技资源 #GitHub #ML #DL #Academic
+    - • <a href="https://github.com/alievk/avatarify">GitHub - alievk/avatarify-python: Avatars for Zoom, Skype and other video-conferencing apps.</a>
+      • <a href="https://github.com/CompVis/stable-diffusion">GitHub - CompVis/stable-diffusion: A latent text-to-image diffusion model</a>
+      • <a href="https://github.com/deepfakes/faceswap">GitHub - deepfakes/faceswap: Deepfakes Software For All</a>
+      • <a href="https://github.com/Avik-Jain/100-Days-Of-ML-Code">GitHub - Avik-Jain/100-Days-Of-ML-Code: 100 Days of ML Coding</a>
+      • <a href="https://github.com/facebookresearch/Detectron2">GitHub - facebookresearch/detectron2: Detectron2 is a platform for object detection, segmentation and other visual recognition tasks.</a>
+      • <a href="https://github.com/fastai/fastai">GitHub - fastai/fastai: The fastai deep learning library</a>
+      • <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">GitHub - CMU-Perceptual-Computing-Lab/openpose: OpenPose: Real-time multi-person keypoint detection library for body, face, hands, and foot estimation</a>
+      • <a href="https://github.com/matterport/Mask_RCNN">GitHub - matterport/Mask_RCNN: Mask R-CNN for object detection and instance segmentation on Keras and TensorFlow</a>
+    - <a href="https://github.com/soumith/ganhacks#authors">GitHub - soumith/ganhacks: starter from "How to Train a GAN?" at NIPS2016</a> #GAN
+    -
+-
+-</p>
+</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023 <a href="https://github.com/csl122"  target="_blank" rel="noopener">Shiliang Chen</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/csl122" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/csl122/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:csl122@hotmail.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.sections", "navigation.tracking", "navigation.indexes", "navigation.expand", "toc.follow", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b425cdc4.min.js"></script>
+      
+    
+  </body>
+</html>
