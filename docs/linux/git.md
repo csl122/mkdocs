@@ -1,5 +1,6 @@
 # Git
 
+> Reference: [Learn Git Branching](https://learngitbranching.js.org/)
 ## 基本操作
   
 ```bash
@@ -66,7 +67,7 @@ HEAD 指向 main， main 指向 C1
 而当我们checkout一个节点的时候: git checkout C1
 HEAD -> C1
     HEAD 指向 C1, main也指向 C1
-    
+
 ```bash
 git checkout <commit_hash>: 将HEAD指向对应的commit hash节点
 ```
