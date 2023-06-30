@@ -80,6 +80,7 @@ nav:
       - Mac: mac/Mac.md
   - Linux: 
       - linux/index.md
+      - Git: linux/git.md
       - Vim: linux/Vim.md
       - AstroNvim: linux/AstroNvim.md
       - Starship: linux/Starship.md
